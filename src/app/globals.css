@@ -1,0 +1,146 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-uncut-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-black: var(--brand-black);
+}
+
+:root {
+  --brand-primary: #f24403;
+  --brand-cream: #f2f0e4;
+  --brand-black: #000000;
+  --brand-purple: #a01fff;
+  --background: var(--brand-cream);
+  --foreground: var(--brand-black);
+  --card: color-mix(in srgb, var(--brand-black) 5%, var(--brand-cream));
+  --card-foreground: var(--brand-black);
+  --popover: var(--brand-cream);
+  --popover-foreground: var(--brand-black);
+  --primary: var(--brand-primary);
+  --primary-foreground: #ffffff;
+  --secondary: color-mix(in srgb, var(--brand-black) 6%, var(--brand-cream));
+  --secondary-foreground: var(--brand-black);
+  --muted: color-mix(in srgb, var(--brand-black) 6%, var(--brand-cream));
+  --muted-foreground: color-mix(in srgb, var(--brand-black) 55%, var(--brand-cream));
+  --accent: color-mix(in srgb, var(--brand-black) 8%, var(--brand-cream));
+  --accent-foreground: var(--brand-black);
+  --destructive: #dc2626;
+  --border: color-mix(in srgb, var(--brand-black) 14%, var(--brand-cream));
+  --input: color-mix(in srgb, var(--brand-black) 14%, var(--brand-cream));
+  --ring: var(--brand-primary);
+  --radius: 0.625rem;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: color-mix(in srgb, var(--brand-black) 16%, transparent);
+  --scrollbar-thumb-hover: color-mix(in srgb, var(--brand-black) 26%, transparent);
+  --scrollbar-thumb-active: color-mix(in srgb, var(--brand-black) 34%, transparent);
+}
+
+.dark {
+  --background: var(--brand-black);
+  --foreground: var(--brand-cream);
+  --card: color-mix(in srgb, var(--brand-cream) 8%, var(--brand-black));
+  --card-foreground: var(--brand-cream);
+  --popover: color-mix(in srgb, var(--brand-cream) 8%, var(--brand-black));
+  --popover-foreground: var(--brand-cream);
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--brand-cream);
+  --secondary: color-mix(in srgb, var(--brand-cream) 12%, var(--brand-black));
+  --secondary-foreground: var(--brand-cream);
+  --muted: color-mix(in srgb, var(--brand-cream) 12%, var(--brand-black));
+  --muted-foreground: color-mix(in srgb, var(--brand-cream) 65%, var(--brand-black));
+  --accent: color-mix(in srgb, var(--brand-cream) 14%, var(--brand-black));
+  --accent-foreground: var(--brand-cream);
+  --destructive: #f87171;
+  --border: color-mix(in srgb, var(--brand-cream) 14%, transparent);
+  --input: color-mix(in srgb, var(--brand-cream) 18%, transparent);
+  --ring: var(--brand-primary);
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: color-mix(in srgb, var(--brand-cream) 14%, transparent);
+  --scrollbar-thumb-hover: color-mix(in srgb, var(--brand-cream) 22%, transparent);
+  --scrollbar-thumb-active: color-mix(in srgb, var(--brand-cream) 30%, transparent);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+  * {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    scrollbar-width: thin;
+  }
+  *::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    background-clip: content-box;
+    border: 3px solid transparent;
+    border-radius: 999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+  *::-webkit-scrollbar-thumb:active {
+    background-color: var(--scrollbar-thumb-active);
+  }
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
