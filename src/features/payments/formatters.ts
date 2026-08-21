@@ -36,7 +36,7 @@ export function safeAvatarUrl(url: string | null | undefined): string | undefine
 }
 
 export function grantfoxProfileUrl(username: string): string {
-  return `https://contribute.grantfox.xyz/profile/${encodeURIComponent(username)}`;
+  return `https://contribute.grantfox.xyz/public/profile/${encodeURIComponent(username)}`;
 }
 
 export function grantfoxOrganizationUrl(organization: string): string {
