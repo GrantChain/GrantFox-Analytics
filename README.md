@@ -9,7 +9,7 @@ filterable by campaign.
 - **Total distributed** — lifetime released amount, split between contributors
   and maintainers.
 - **Contributor payments** — GitHub handle, project, and amount for every
-  released payment. Searchable and sortable.
+  released payment. Searchable and ordered by newest escrow first.
 - **Maintainer payments** — released and funded amounts per project escrow, with
   a link to the escrow on the
   [Trustless Work viewer](https://viewer.trustlesswork.com).
@@ -26,6 +26,11 @@ and avatar.
 
 Never published: wallet addresses, emails, or payment dates. Only milestones the
 chain reports as released appear — pending and rejected ones are excluded.
+
+Payment lists use the escrow indexer's `createdAt desc` order. Trustless Work
+does not return a release timestamp per milestone, so contributor payments in
+the same escrow retain their milestone order rather than claiming a more precise
+payment chronology than the source provides.
 
 Verification is escrow-level, not payment-level: GrantFox stores no per-payment
 transaction hash, so the viewer link shows the escrow, not an individual payout.
