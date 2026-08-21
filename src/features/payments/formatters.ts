@@ -16,7 +16,9 @@ export function trustlessWorkViewerUrl(escrowId: string): string {
 }
 
 // Restrict user-controlled avatar URLs to trusted hosts to prevent tracking pixels.
-export function safeAvatarUrl(url: string | null | undefined): string | undefined {
+export function safeAvatarUrl(
+  url: string | null | undefined,
+): string | undefined {
   if (!url) return undefined;
 
   try {
