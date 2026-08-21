@@ -16,7 +16,9 @@ export function trustlessWorkViewerUrl(escrowId: string): string {
 }
 
 // Restrict user-controlled avatar URLs to trusted hosts to prevent tracking pixels.
-export function safeAvatarUrl(url: string | null | undefined): string | undefined {
+export function safeAvatarUrl(
+  url: string | null | undefined,
+): string | undefined {
   if (!url) return undefined;
 
   try {
@@ -36,7 +38,7 @@ export function safeAvatarUrl(url: string | null | undefined): string | undefine
 }
 
 export function grantfoxProfileUrl(username: string): string {
-  return `https://contribute.grantfox.xyz/profile/${encodeURIComponent(username)}`;
+  return `https://contribute.grantfox.xyz//public/profile/${encodeURIComponent(username)}`;
 }
 
 export function grantfoxOrganizationUrl(organization: string): string {
