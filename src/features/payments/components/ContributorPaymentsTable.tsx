@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  InfoIcon,
-  SearchIcon,
-} from "lucide-react";
+import { InfoIcon, SearchIcon } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -32,8 +27,6 @@ import type { ContributorPayment } from "../types";
 import { StellarLink } from "./StellarLink";
 import { UsdcIcon } from "./UsdcIcon";
 
-type SortDir = "desc" | "asc";
-
 const PAGE_SIZE = 25;
 
 export function ContributorPaymentsTable({
@@ -50,7 +43,6 @@ export function ContributorPaymentsTable({
   currency: string;
 }) {
   const [query, setQuery] = useState("");
-  const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [visible, setVisible] = useState(PAGE_SIZE);
 
   const rows = useMemo(() => {
@@ -63,10 +55,8 @@ export function ContributorPaymentsTable({
         )
       : payments;
 
-    return [...filtered].sort((a, b) =>
-      sortDir === "desc" ? b.amount - a.amount : a.amount - b.amount,
-    );
-  }, [payments, query, sortDir]);
+    return filtered;
+  }, [payments, query]);
 
   const shown = rows.slice(0, visible);
   const remaining = rows.length - shown.length;
@@ -86,7 +76,7 @@ export function ContributorPaymentsTable({
                 ? ` | ${formatCount(rows.length)} matching`
                 : null}
               {truncated
-                ? ` | showing the largest ${formatCount(payments.length)}`
+                ? ` | showing the most recent ${formatCount(payments.length)}`
                 : null}
               {unattributed > 0
                 ? ` | ${formatCount(unattributed)} without a resolved GitHub handle`
@@ -124,21 +114,10 @@ export function ContributorPaymentsTable({
               <TableHead className="min-w-[200px]">Contributor</TableHead>
               <TableHead className="min-w-[200px]">Project</TableHead>
               <TableHead className="min-w-[140px] text-right">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setSortDir((d) => (d === "desc" ? "asc" : "desc"))
-                  }
-                  className="ml-auto inline-flex items-center gap-1 transition-colors hover:text-foreground"
-                >
+                <span className="ml-auto inline-flex items-center gap-1">
                   Amount
                   {currency ? <UsdcIcon className="size-4" /> : null}
-                  {sortDir === "desc" ? (
-                    <ArrowDownIcon className="size-3.5" />
-                  ) : (
-                    <ArrowUpIcon className="size-3.5" />
-                  )}
-                </button>
+                </span>
               </TableHead>
               <TableHead className="min-w-[110px] text-right">Escrow</TableHead>
             </TableRow>

@@ -95,7 +95,7 @@ export async function getContributorPayments(
   const snapshot = await getPaymentSnapshot();
   if (!snapshot) return null;
 
-  const all = [...snapshot.contributor].sort((a, b) => b.amount - a.amount);
+  const all = snapshot.contributor;
   const page = all.slice(0, limit);
   const items: ContributorPayment[] = page.map((payment) => ({
     payment_id: `${payment.escrow_id}:${payment.milestone_index}`,
@@ -128,9 +128,7 @@ export async function getMaintainerPayouts(): Promise<MaintainerPayouts | null> 
   const snapshot = await getPaymentSnapshot();
   if (!snapshot) return null;
 
-  const items = [...snapshot.maintainer]
-    .sort((a, b) => b.released_amount - a.released_amount)
-    .map(withoutReceiver);
+  const items = snapshot.maintainer.map(withoutReceiver);
   const fetchedAt = new Date(snapshot.fetched_at).getTime();
 
   return {

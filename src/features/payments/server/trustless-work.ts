@@ -84,6 +84,7 @@ export async function listPlatformEscrows(): Promise<TwEscrow[]> {
         await twFetch<unknown>(
           `/helper/get-escrows-by-role?role=platformAddress` +
             `&roleAddress=${encodeURIComponent(platform)}` +
+            `&orderBy=createdAt&orderDirection=desc` +
             `&page=${page}&pageSize=${PAGE_SIZE}`,
           FETCH_TTL_SECONDS,
         ),
