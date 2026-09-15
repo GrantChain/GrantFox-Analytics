@@ -52,6 +52,14 @@ function num(value: unknown): number {
   return Number.isFinite(n) ? n : 0;
 }
 
+// Testing escrow IDs on actual prod campaigns we have to remove.
+const TEST_ESCROW_IDS = new Set([
+  "CBRZSYMMYZPIA3XUY53G6QZDTTNL4MV4LTTTCUTHGQ3DL26JCSHSGM5M",
+  "CANBN3M7JX2R3TMCLVS64JMM4JWI67XFLQSUJTEIDKXVQSWETNBUORL4",
+  "CCHY44PN6E4GGOAF74WCXYNGLWO7GO2E6QOPRAN3HKGMVN2WM275KHM6",
+  "CAV6FHZ5ZC5GRU6KTMYA6UJY2MLNDBQ3MXQWIM3HMNJHW32JYVPRSUMW",
+]);
+
 const JUNK_TITLE_PATTERNS = [/\[dev template\]/i, /^test-pr\b/i];
 
 function isJunk(escrow: TwEscrow): boolean {
@@ -87,7 +95,7 @@ const loadSnapshot = unstable_cache(
     let currency = FALLBACK_CURRENCY;
 
     for (const escrow of escrows) {
-      if (isJunk(escrow)) {
+      if (TEST_ESCROW_IDS.has(escrow.contractId) || isJunk(escrow)) {
         excluded++;
         continue;
       }
@@ -172,7 +180,7 @@ const loadSnapshot = unstable_cache(
       },
     };
   },
-  ["payment-snapshot"],
+  ["payment-snapshot:v2"],
   { revalidate: CACHE_TTL, tags: ["payments", "trustless-work"] },
 );
 
